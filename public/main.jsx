@@ -14,7 +14,7 @@ var App = React.createClass({
     },
     render: function() {
         return (
-            <div>
+            <div className="app">
                 <SubmitForm submitFunc={this.handleNewWord} />
                 <DisplayArea sentence={this.state.data}/>
             </div>
@@ -32,7 +32,7 @@ var SubmitForm = React.createClass({
     },
     render: function() {
         return (
-            <form onSubmit={this.addWord}>
+            <form className="submit-form" onSubmit={this.addWord}>
                 <input type="text" ref="newWord" />
             </form>
         )
@@ -42,7 +42,7 @@ var SubmitForm = React.createClass({
 var DisplayArea = React.createClass({
     render: function() {
         return (
-            <div>{this.props.sentence}</div>
+            <div className="display-area">{this.props.sentence}</div>
         )
     }
 })
