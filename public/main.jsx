@@ -10,7 +10,7 @@ var App = React.createClass({
     },
     handleNewWord: function(word) {
         console.log('handleNewWord', word)
-        return this.setState({data: this.state.data + word})
+        return this.setState({data: this.state.data + ' ' + word})
     },
     render: function() {
         return (
@@ -27,6 +27,7 @@ var SubmitForm = React.createClass({
         // TODO: Handle http post
         e.preventDefault()
         var word = this.refs.newWord.getDOMNode().value.trim()
+        this.refs.newWord.getDOMNode().value = ''
         console.log('addWord', word)
         return this.props.submitFunc(word)
     },
