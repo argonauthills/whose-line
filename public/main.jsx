@@ -1,7 +1,7 @@
 /* <Form/>
  * <DisplayArea/>
  *
-* */
+*/
 
 var testSentence = "Hello world. This is a real sentence."
 var App = React.createClass({
