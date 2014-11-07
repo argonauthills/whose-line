@@ -1,0 +1,22 @@
+{
+  "name": "react-first-day",
+  "version": "0.0.0",
+  "authors": [
+    "Jason Hills <jasonahills@gmail.com>"
+  ],
+  "description": "playing around with reactjs",
+  "main": "main.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.12.0",
+    "jquery": "~2.1.1"
+  }
+}
