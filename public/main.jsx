@@ -24,9 +24,13 @@ var App = React.createClass({
             }.bind(this),
         })
     },
+    reset: function() {
+        this.setState({data: ""})
+    },
     handleNewWord: function(word) {
         this.setState({data: joinWords(this.state.data, word)})
         console.log('handleNewWord', word)
+        if (word == "reset") return this.reset()
         return this.requestGoogleWord(word)
     },
     render: function() {
@@ -45,37 +49,43 @@ var App = React.createClass({
 
 var SubmitForm = React.createClass({
     getInitialState: function() {
-        return {spaces: "", currentInput: ""}
+        return {spaces: "", currentInput: "&nbsp;", focused:true}
     },
     addWord: function(e) {
         // TODO: Handle http post
         e.preventDefault()
         var word = this.getWord()
         this.refs.newWord.getDOMNode().value = ''
-        console.log('addWord', word)
         return this.props.submitFunc(word)
     },
     getWord: function() {
         return this.refs.newWord.getDOMNode().value.trim()
     },
     focus: function() {
+        this.setState({focused:true})
         this.refs.newWord.getDOMNode().focus()
+    },
+    blur: function() {
+        this.setState({focused:false})
     },
     checkPos: function(e) {
         var pos = e.target.selectionStart
         var spaces = Array(pos + 1).join("&nbsp;")  //Hacky way to get array of spaces of a given length   
         this.setState({spaces: spaces, currentInput: this.getWord()})
-
-        console.log("spaces", spaces, this.state.spaces)
     },
     render: function() {
+        var cx = React.addons.classSet
+        var cursorClasses = cx({
+            'terminal-cursor':true,
+            'focused':this.state.focused
+        })
         return (
             <form className="submit-form" onClick={this.focus} onSubmit={this.addWord}>
                 <p>Enter the next word in your sentence.</p>
                 <p>Type "reset" to start over.</p>
-                <p className="terminal-cursor" dangerouslySetInnerHTML={{__html: this.state.spaces + "&#x2588;"}}></p>
-                <p className="terminal-input" dangerouslySetInnerHTML={{__html: this.state.currentInput}}></p>
-                <input className="hidden-input" type="text" ref="newWord" onKeyUp={this.checkPos} autofocus/>
+                <p className={cursorClasses} dangerouslySetInnerHTML={{__html: this.state.spaces + "&#x2588;"}}></p>
+                <p className="terminal-input" dangerouslySetInnerHTML={{__html: this.state.currentInput + "&nbsp;"}}></p>
+                <input className="hidden-input" type="text" ref="newWord" onKeyUp={this.checkPos} onBlur={this.blur} autoFocus/>
             </form>
         )
     }
@@ -94,7 +104,7 @@ React.render(
     document.getElementById('content')
 );
 
-console.log("works!")
+
 
 function parseNextGoogleWord(response) {
     console.log('response', response)
