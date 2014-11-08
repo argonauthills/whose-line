@@ -84,6 +84,7 @@ var SubmitForm = React.createClass({
                 <p>Enter the next word in your sentence.</p>
                 <p>Type "reset" to start over.</p>
                 <p className={cursorClasses} dangerouslySetInnerHTML={{__html: this.state.spaces + "&#x2588;"}}></p>
+                <p className='terminal-cursor' dangerouslySetInnerHTML={{__html: this.state.spaces + "_"}}></p>
                 <p className="terminal-input" dangerouslySetInnerHTML={{__html: this.state.currentInput + "&nbsp;"}}></p>
                 <input className="hidden-input" type="text" ref="newWord" onKeyUp={this.checkPos} onBlur={this.blur} autoFocus/>
             </form>
