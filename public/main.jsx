@@ -3,14 +3,31 @@
  *
 */
 
-var testSentence = "Hello world. This is a real sentence."
 var App = React.createClass({
     getInitialState: function() {
-        return {data: testSentence}
+        return {data: ""}
+    },
+    requestGoogleWord: function(phrase) {
+        var wordsToSend = lastFewWords(joinWords(this.state.data, phrase))
+        var encodedPhrase = encodeURIComponent(wordsToSend)
+        var url="http://suggestqueries.google.com/complete/search?client=chrome&q="+encodedPhrase
+        $.ajax({
+            url: url,
+            type: 'GET',
+            crossDomain: true,
+            dataType: 'jsonp',
+            success: function(rs) {
+                this.setState({data: joinWords(this.state.data, googleNextWord(rs, this.state.data))})
+            }.bind(this),
+            error: function(error) {
+                console.log('error',error)
+            }.bind(this),
+        })
     },
     handleNewWord: function(word) {
+        this.setState({data: joinWords(this.state.data, word)})
         console.log('handleNewWord', word)
-        return this.setState({data: this.state.data + ' ' + word})
+        return this.requestGoogleWord(word)
     },
     render: function() {
         return (
@@ -54,3 +71,26 @@ React.render(
 );
 
 console.log("works!")
+
+function googleNextWord(response) {
+    console.log('response', response)
+    var oldLength = response[0].split(' ').length
+    var newWord = response[1][0].split(' ')[oldLength]
+    console.log('oldLength',oldLength,'newWord',newWord)
+    return newWord
+}
+
+function lastFewWords(string) {
+    //var splitWords = string.split(' ')
+    //var lastWords = splitWords.slice(Math.max(splitWords.length - 5, 0))
+    //var x = lastWords.join(' ')
+    //console.log('words sent', x)
+    //return x
+    console.log('string', string)
+    return string
+}
+
+function joinWords(phrase, word) {
+    if (!phrase) return word
+    else return phrase + ' ' + word
+}
