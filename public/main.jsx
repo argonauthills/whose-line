@@ -44,18 +44,38 @@ var App = React.createClass({
 })
 
 var SubmitForm = React.createClass({
+    getInitialState: function() {
+        return {spaces: "", currentInput: ""}
+    },
     addWord: function(e) {
         // TODO: Handle http post
         e.preventDefault()
-        var word = this.refs.newWord.getDOMNode().value.trim()
+        var word = this.getWord()
         this.refs.newWord.getDOMNode().value = ''
         console.log('addWord', word)
         return this.props.submitFunc(word)
     },
+    getWord: function() {
+        return this.refs.newWord.getDOMNode().value.trim()
+    },
+    focus: function() {
+        this.refs.newWord.getDOMNode().focus()
+    },
+    checkPos: function(e) {
+        var pos = e.target.selectionStart
+        var spaces = Array(pos + 1).join("&nbsp;")  //Hacky way to get array of spaces of a given length   
+        this.setState({spaces: spaces, currentInput: this.getWord()})
+
+        console.log("spaces", spaces, this.state.spaces)
+    },
     render: function() {
         return (
-            <form className="submit-form" onSubmit={this.addWord}>
-                <input type="text" ref="newWord" />
+            <form className="submit-form" onClick={this.focus} onSubmit={this.addWord}>
+                <p>Enter the next word in your sentence.</p>
+                <p>Type "reset" to start over.</p>
+                <p className="terminal-cursor" dangerouslySetInnerHTML={{__html: this.state.spaces + "&#x2588;"}}></p>
+                <p className="terminal-input" dangerouslySetInnerHTML={{__html: this.state.currentInput}}></p>
+                <input className="hidden-input" type="text" ref="newWord" onKeyUp={this.checkPos} autofocus/>
             </form>
         )
     }

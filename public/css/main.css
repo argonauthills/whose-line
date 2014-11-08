@@ -41,8 +41,24 @@ body, body * {
     position:relative;
 }
 
+.terminal-input {
+
+}
+
+.terminal-cursor {
+    background-color: transparent;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+
 .display-area {
 
+}
+
+.hidden-input {
+    position: absolute;
+    z-index: -20;
 }
 
 
