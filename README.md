@@ -1,5 +1,5 @@
 # Whose Line
-### Google knows you so well, it completes all your sentences.
+### Google knows you so well, completes all your sentences.
 
 -------
 

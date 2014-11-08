@@ -17,7 +17,7 @@ var App = React.createClass({
             crossDomain: true,
             dataType: 'jsonp',
             success: function(rs) {
-                this.setState({data: joinWords(this.state.data, googleNextWord(rs, this.state.data))})
+                this.setState({data: joinWords(this.state.data, parseNextGoogleWord(rs, this.state.data))})
             }.bind(this),
             error: function(error) {
                 console.log('error',error)
@@ -32,8 +32,12 @@ var App = React.createClass({
     render: function() {
         return (
             <div className="app">
-                <SubmitForm submitFunc={this.handleNewWord} />
-                <DisplayArea sentence={this.state.data}/>
+                <div className="inner-border">
+                    <div className="terminal-display">
+                        <DisplayArea sentence={this.state.data}/>
+                        <SubmitForm submitFunc={this.handleNewWord} />
+                    </div>
+                </div>
             </div>
         )
     }
@@ -72,7 +76,7 @@ React.render(
 
 console.log("works!")
 
-function googleNextWord(response) {
+function parseNextGoogleWord(response) {
     console.log('response', response)
     var oldLength = response[0].split(' ').length
     var newWord = response[1][0].split(' ')[oldLength]
