@@ -1,7 +1,7 @@
 body, body * {
     background-color: #001800;
-    color: #00FF00;
-    border-color: #00FF00;
+    color: #55ee00;
+    border-color: #55ee00;
     font-family: menlo, sans-serif;
     line-height: 1.5;
     box-sizing: border-box;
@@ -63,12 +63,12 @@ p {
 
 
 input {
-    border: 3px solid #00FF00;
+    border: 3px solid #55ee00;
     font-size: 15px;
 }
 
 input:focus {
-    outline-color: #00FF00;
+    /*outline-color: #33FF00;*/
 }
 
 
