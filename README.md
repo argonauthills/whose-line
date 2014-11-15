@@ -1,5 +1,5 @@
 # Whose Line
-### Google knows you so well, completes all your sentences.
+### Google knows you well, completes your sentence.
 
 [Live Demo](http://argonauthills.github.io/whose-line)
 
