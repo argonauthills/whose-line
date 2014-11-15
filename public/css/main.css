@@ -2,7 +2,7 @@ body, body * {
     background-color: #001800;
     color: #55ee00;
     border-color: #55ee00;
-    font-family: menlo, sans-serif;
+    font-family: menlo, monospace;
     line-height: 1.5;
     box-sizing: border-box;
 }
