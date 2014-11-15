@@ -1,5 +1,5 @@
 body, body * {
-    background-color: #151515;
+    background-color: #001800;
     color: #00FF00;
     border-color: #00FF00;
     font-family: menlo, sans-serif;
@@ -19,16 +19,16 @@ p {
 .app {
     margin: 100px auto;
     width: 500px;
-    height: 500px;
+    height: 400px;
     padding: 5px;
-    border: 4px solid;
+    /*border: 4px solid;  */
 }
 
 .inner-border {
     width:100%;
     height:100%;
     padding: 20px;
-    border: 2px solid;
+/*    border: 2px solid;*/    
     position:relative;
 }
 
@@ -68,7 +68,7 @@ input {
 }
 
 input:focus {
-    outline-color: #00FF00
+    outline-color: #00FF00;
 }
 
 
